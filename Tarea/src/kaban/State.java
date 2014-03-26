@@ -1,7 +1,8 @@
 package kaban;
 
 public enum State {
-	DO_YO,
+	DO_TO,
 	IN_PROCESS,
-	DONE
+	DONE,
+	BACKLOG
 }

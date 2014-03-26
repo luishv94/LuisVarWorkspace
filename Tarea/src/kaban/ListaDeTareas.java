@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 
 public class ListaDeTareas implements Dashboard {
+	
 	private transient Tarea[] listaDeTareas;
 	private int size;
 	private transient int modCount = 0;
@@ -19,7 +20,7 @@ public class ListaDeTareas implements Dashboard {
 	//Buscar()
 	
 	
-	public boolean Agregar(Tarea tarea){
+	public boolean add(Tarea tarea){
 		ensureCapacity(size + 1);
 		listaDeTareas[size++] = tarea;
 		return true;		

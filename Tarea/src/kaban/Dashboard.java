@@ -1,7 +1,9 @@
 package kaban;
 
+
+
 public interface Dashboard{
-	boolean Agregar(Tarea tarea);
+	public abstract boolean add(Tarea tarea);
 	boolean remove(Tarea tarea);
 	
 }

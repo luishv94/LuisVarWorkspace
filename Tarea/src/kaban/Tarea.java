@@ -2,6 +2,7 @@ package kaban;
 
 import java.util.Date;
 
+
 public class Tarea {
 	private String descripcion;
 	private String titulo;
@@ -11,11 +12,27 @@ public class Tarea {
 	private String propietario;
 	private Date fechaDeEntrega;
 	private Date fechaDeCreacion;
-	
+		
 	public Tarea() {
-		super();
-		this.titulo = "";
+		this("");
+		System.out.println("starting Task() ctor...");
 	}
+
+	public Tarea(String titulo) {
+		this(titulo, State.BACKLOG);
+		System.out.println("starting Task(String) ctor...");
+	}
+
+	public Tarea(String titulo, State state) {
+		super();
+		System.out.println("starting Task(String, State) ctor...");
+		
+		this.titulo = titulo;
+		fechaDeCreacion = new Date();
+		prioridad = 1;
+		this.estado = estado;
+	}
+	
 	public String getTitulo() {
 		return titulo;
 	}
@@ -68,5 +85,17 @@ public class Tarea {
 	}
 	public void setFechaDeCreacion(Date fechaDeCreacion) {
 		this.fechaDeCreacion = fechaDeCreacion;
-	}		
+	}	
+	public String toString() {
+		return this.titulo;
+	}
+
+	public boolean equals(Object obj) {
+		if (obj != null) {
+			if (obj instanceof Tarea) {
+				return titulo.equals(((Tarea) obj).getTitulo());
+			}
+		}
+		return false;
+	}
 }
