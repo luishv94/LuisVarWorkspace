@@ -4,12 +4,28 @@ import java.util.Date;
 
 public class Tarea {
 	private String descripcion;
+	private String titulo;
 	private State estado;
 	private String categoria;
 	private int prioridad;	
 	private String propietario;
 	private Date fechaDeEntrega;
 	private Date fechaDeCreacion;
+	
+	public Tarea() {
+		super();
+		this.titulo = "";
+	}
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		if (titulo != null) {
+			this.titulo = titulo;
+		}
+	}
+	
 	public String getDescripcion() {
 		return descripcion;
 	}
