@@ -98,4 +98,14 @@ public class Tarea {
 		}
 		return false;
 	}
+	public boolean save(){
+		try{
+			Thread.sleep(1*1000);
+		}catch(InterruptedException e ){
+			e.printStackTrace();
+		}
+		return true;
+	}
 }
+
+
