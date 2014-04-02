@@ -19,17 +19,26 @@ public class Tarea {
 	}
 
 	public Tarea(String titulo) {
-		this(titulo, State.BACKLOG);
+		this(titulo, State.BACKLOG, (int) 1);
 		System.out.println("starting Task(String) ctor...");
 	}
-
+	
+	public Tarea(String Titulo, int prioridad){
+		this(Titulo,State.BACKLOG,prioridad);
+		System.out.println("starting Task(String, Prioridad)");
+	}
 	public Tarea(String titulo, State state) {
+		this(titulo,state,(int)1);
+		System.out.println("Starting Task (String, State)");
+	}
+
+	public Tarea(String titulo, State state,int prioridad) {
 		super();
-		System.out.println("starting Task(String, State) ctor...");
+		System.out.println("starting Task(String, State, Priority) ctor...");
 		
 		this.titulo = titulo;
 		fechaDeCreacion = new Date();
-		prioridad = 1;
+		this.prioridad=prioridad;
 		this.estado = estado;
 	}
 	
