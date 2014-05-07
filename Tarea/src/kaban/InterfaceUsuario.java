@@ -25,11 +25,16 @@ public class InterfaceUsuario extends JFrame {
 		init();
 	}
 	public void init(){
-				JPanel panelOeste =new JPanel(new GridLayout(3, 1));
+				titulo.setPreferredSize(new Dimension(150,25));
+				JPanel panelOeste =new JPanel(new GridLayout(6, 1)),panelCental=new JPanel(new GridLayout(6,1));
 				panelOeste.add(new JLabel("Titulo"));
 				panelOeste.add(new JLabel("Estado"));
 				panelOeste.add(new JLabel("Prioridad"));
+				panelCental.add(titulo);
+				panelCental.add(listaEstado);
+				panelCental.add(listaPrioridad);
 				add(panelOeste,BorderLayout.WEST);
+				add(panelCental,BorderLayout.CENTER);
 				add(boton,BorderLayout.SOUTH);
 //				titulo.setPreferredSize(new Dimension(300, 25));
 //				JPanel panel1=new JPanel(new FlowLayout()),panel2=new JPanel(new FlowLayout()),panel3=new JPanel(new FlowLayout());
