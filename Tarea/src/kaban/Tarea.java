@@ -12,6 +12,7 @@ public class Tarea {
 	private String propietario;
 	private Date fechaDeEntrega;
 	private Date fechaDeCreacion;
+	private final Object addSave=new Object();
 		
 	public Tarea() {
 		this("");
@@ -107,13 +108,23 @@ public class Tarea {
 		}
 		return false;
 	}
-	public boolean save(){
+	
+	public synchronized boolean remove(){
+		synchronized(this){
+		return true;
+		}
+	}
+	
+	public synchronized boolean save(){
+		
+		synchronized(addSave){
 		try{
 			Thread.sleep(1*1000);
 		}catch(InterruptedException e ){
 			e.printStackTrace();
 		}
 		return true;
+	}
 	}
 }
 
