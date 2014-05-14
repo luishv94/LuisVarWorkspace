@@ -10,13 +10,24 @@ public class Tarea {
 	private String categoria;
 	private int prioridad;	
 	private String propietario;
-	private Date fechaDeEntrega;
+	private String fechaDeEntrega;
 	private Date fechaDeCreacion;
 	private final Object addSave=new Object();
 		
 	public Tarea() {
 		this("");
 		System.out.println("starting Task() ctor...");
+	}
+	
+	public Tarea(String titulo, String categoria, String propietario, String descripcion, String fechaE, State estado,int prioridad){
+		this.titulo=titulo;
+		this.categoria=categoria;
+		this.propietario=propietario;
+		this.descripcion=descripcion;
+		this.fechaDeEntrega=fechaE;
+		this.estado=estado;
+		this.prioridad=prioridad;
+		
 	}
 
 	public Tarea(String titulo) {
@@ -84,10 +95,10 @@ public class Tarea {
 	public void setPropietario(String propietario) {
 		this.propietario = propietario;
 	}
-	public Date getFechaDeEntrega() {
+	public String getFechaDeEntrega() {
 		return fechaDeEntrega;
 	}
-	public void setFechaDeEntrega(Date fechaDeEntrega) {
+	public void setFechaDeEntrega(String fechaDeEntrega) {
 		this.fechaDeEntrega = fechaDeEntrega;
 	}
 	public Date getFechaDeCreacion() {

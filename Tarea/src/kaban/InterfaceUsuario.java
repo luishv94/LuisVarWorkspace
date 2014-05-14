@@ -1,4 +1,4 @@
-package kaban;
+/*package kaban;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -146,4 +146,4 @@ public class InterfaceUsuario extends JFrame {
 		a.setSize(400, 300);
 		a.setVisible(true);
 	}
-}
+}*/
