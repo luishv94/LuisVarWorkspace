@@ -17,6 +17,10 @@ public class hd extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JComboBox comboBox_1=new JComboBox();
+	private JComboBox<State> comboBox = new JComboBox<State>(State.values());
+	
+	
 
 	/**
 	 * Create the panel.
@@ -49,8 +53,12 @@ public class hd extends JFrame {
 		JLabel lblEstado = new JLabel("Estado");
 		lblEstado.setBounds(89, 326, 46, 14);
 		getContentPane().add(lblEstado);
-
-		final JComboBox<State> comboBox = new JComboBox<State>(State.values());
+		
+		/* JComboBox comboBox = new JComboBox();// <--------------------------------------------------------------------
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Baja",
+				"Media", "Alta" }));*/
+		
+		
         comboBox.setBounds(89, 351, 137, 20);
         getContentPane().add(comboBox);
 
@@ -58,7 +66,7 @@ public class hd extends JFrame {
 		lblPrioridad.setBounds(89, 382, 89, 14);
 		getContentPane().add(lblPrioridad);
 
-		final JComboBox comboBox_1 = new JComboBox();// why final
+		
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "Baja",
 				"Media", "Alta" }));
 		comboBox_1.setBounds(89, 407, 137, 20);
@@ -67,92 +75,28 @@ public class hd extends JFrame {
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				// JOptionPane.showConfirmDialog(null,"Desea agregar los datos?");
-
-				// TODO: Validarlos y agregar info a vars
-
-				String titulo = textField_2.getText();
-				if ("".equalsIgnoreCase(titulo.trim())) {// Metodo de trim quita
-															// espacios en
-															// blanco al
-															// principio y al
-															// final
-					JOptionPane.showMessageDialog(null, "Título Vacío!");
-				}
-
-				String categoria = textField_4.getText();
-				if ("".equalsIgnoreCase(categoria.trim())) {
-					JOptionPane.showMessageDialog(null, "Categoría Vacía!");
-				}
-
-				String propietario = textField_3.getText();
-				if ("".equalsIgnoreCase(propietario.trim())) {
-					JOptionPane.showMessageDialog(null, "Propietario Vacío!");
-				}
-
-				String descripcion = textField.getText();
-				if ("".equalsIgnoreCase(descripcion.trim())) {
-					JOptionPane.showMessageDialog(null, "Descripción Vacía!");
-				}
-
-				String fechaE = textField_1.getText();
-				if ("".equalsIgnoreCase(fechaE.trim())) {
-					JOptionPane.showMessageDialog(null,
-							"Fecha de entrega Vacia!");
-				}
 				
 				
-				State estado=(State)comboBox.getSelectedItem();
-							
-				
-				/*String estado = (String) comboBox.getSelectedItem();
-				State Estado;
-				if (estado.equals("Por Hacer")) {
-					 Estado=State.DO_TO;
-				} else if (estado.equals("En progreso")) {
-					 Estado=State.IN_PROCESS;
-				} else if (estado.equals("Hecha")) {
-					 Estado=State.DONE;
-				}*/
-
-				
-				String prioridad=(String)comboBox_1.getSelectedItem();
-				int Prioridad=0;
-				if(prioridad.equals("Alta")){
-					Prioridad=1;
-				}
-				else if(prioridad.equals("Media")){
-					Prioridad=2;
-				}
-				else if(prioridad.equals("Baja")){
-					Prioridad=3;
-				}
-				
-				
-				
-
-				// TODO: Agregarlos
-
-				Tarea tarea = new Tarea(titulo, categoria, propietario,
-						descripcion, fechaE, estado, Prioridad);
-
-				// tarea.setDescripcion(textField.getText().trim());//ANOTHER
-				// WAY BUT WITHOUT AN VALIDATION
-
-				Programa.dashboard.add(tarea);
-				JOptionPane.showMessageDialog(
-						null,
-						"Nueva tarea creada, su contenido es:\nTitulo: "
-								+ tarea.getTitulo() + "\nCategoría: "
-								+ tarea.getCategoria() + "\nPropietario: "
-								+ tarea.getPropietario() + "\nDescripción: "
-								+ tarea.getDescripcion()
-								+ "\nFecha de entrega: "
-								+ tarea.getFechaDeEntrega()
-								+ "\nEstado: "+tarea.getEstado()
-								+ "\nPrioridad: "+tarea.getPrioridad()+" o "+prioridad);
-
+				try{
+					verify();
+					if (JOptionPane.YES_OPTION == JOptionPane
+							.showConfirmDialog(null,
+									"Do you want to add this task?",
+									"Confirmation",
+									JOptionPane.YES_NO_OPTION,
+									JOptionPane.INFORMATION_MESSAGE)) {
+						if (save()) {
+							JOptionPane.showMessageDialog(null,
+									"Task added successfully!!!");
+							clean();
+						}
+					}					
+				}catch(EmptyComponentException ex){
+					JOptionPane.showMessageDialog(null,ex.getMessage(),"Validation error",JOptionPane.ERROR_MESSAGE);
+					ex.getComponent().requestFocus();
+				}catch(Exception ex){
+					JOptionPane.showMessageDialog(null,ex.getMessage(),"Validation error",JOptionPane.ERROR_MESSAGE);
+				}						
 			}
 		});
 		btnCrear.setBounds(67, 449, 84, 23);
@@ -194,6 +138,66 @@ public class hd extends JFrame {
 		btnCerrar.setBounds(164, 449, 89, 23);
 		getContentPane().add(btnCerrar);
 
+	}
+	private void isEmpty(String message,JTextField text) throws Exception{
+		
+			if ("".equals(text.getText().trim())) {
+				
+				throw new EmptyComponentException(message,text);
+	}			
+		
+	}
+	private void verify() throws Exception{
+		
+		isEmpty("Titulo vacío",textField_2);
+		isEmpty("Categoría vacía",textField_4);
+		isEmpty("Propietario vacío",textField_3);
+		isEmpty("Descripción vacía",textField);
+		isEmpty("Fecha de entrega vacía",textField_1);	
+		}
+	private void clean(){
+		textField.setText("");
+		textField_1.setText("");
+		textField_2.setText("");
+		textField_3.setText("");
+		textField_4.setText("");
+	}
+	private boolean save(){
+		String titulo = textField_2.getText();
+		String categoria = textField_4.getText();
+		String propietario = textField_3.getText();
+		String descripcion = textField.getText();
+		String fechaE = textField_1.getText();
+		State estado=(State)comboBox.getSelectedItem();
+		
+		String prioridad=(String)comboBox_1.getSelectedItem();
+		int Prioridad=0;
+		if(prioridad.equals("Alta")){
+			Prioridad=1;
+		}
+		else if(prioridad.equals("Media")){
+			Prioridad=2;
+		}
+		else if(prioridad.equals("Baja")){
+			Prioridad=3;			
+	}
+		Tarea tarea = new Tarea(titulo, categoria, propietario,
+				descripcion, fechaE, estado, Prioridad);	
+		
+		Programa.dashboard.add(tarea);
+		JOptionPane.showMessageDialog(
+				null,
+				"Nueva tarea creada, su contenido es:\nTitulo: "
+						+ tarea.getTitulo() + "\nCategoría: "
+						+ tarea.getCategoria() + "\nPropietario: "
+						+ tarea.getPropietario() + "\nDescripción: "
+						+ tarea.getDescripcion()
+						+ "\nFecha de entrega: "
+						+ tarea.getFechaDeEntrega()
+						+ "\nEstado: "+tarea.getEstado()
+						+ "\nPrioridad: "+tarea.getPrioridad()+" o "+prioridad);
+		
+		return true;
 	}
 
 	public static void main(String[] args) {
