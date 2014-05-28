@@ -139,7 +139,7 @@ public class hd extends JFrame {
 		getContentPane().add(btnCerrar);
 
 	}
-	private void isEmpty(String message,JTextField text) throws Exception{
+	private void isEmpty(String message,JTextField text) throws EmptyComponentException{
 		
 			if ("".equals(text.getText().trim())) {
 				
@@ -147,7 +147,7 @@ public class hd extends JFrame {
 	}			
 		
 	}
-	private void verify() throws Exception{
+	private void verify() throws EmptyComponentException{
 		
 		isEmpty("Titulo vacío",textField_2);
 		isEmpty("Categoría vacía",textField_4);
