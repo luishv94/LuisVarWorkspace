@@ -64,6 +64,22 @@ public class Tarea {
 		}
 	}
 	
+	public State getState() {
+		return estado;
+	}
+
+	public void setState(State state) {
+		state = estado;
+	}
+	
+	public int getPriority() {
+		return prioridad;
+	}
+
+	public void setPriority(int priority) {
+		priority = prioridad;
+	}
+	
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -136,6 +152,16 @@ public class Tarea {
 		}
 		return true;
 	}
+	}
+	public String toHtml() {
+		return "<table><tr><td>Titulo:</td><td>" + titulo + "</td></tr>"
+				+ "<tr><td>Descripction:</td><td>" + descripcion + "</td></tr>"
+				+ "<tr><td>Estado:</td><td>" + estado + "</td></tr>"
+				+ "<tr><td>Categoria:</td><td>" + categoria + "</td></tr>"
+				+ "<tr><td>Prioridad:</td><td>" + prioridad + "</td></tr>"
+				+ "<tr><td>Propietario:</td><td>" + propietario + "</td></tr>"
+				+ "<tr><td>Fecha De Entrega:</td><td>" + fechaDeEntrega + "</td></tr>"
+				+ "</td></tr></table>";
 	}
 }
 

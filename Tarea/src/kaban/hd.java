@@ -20,7 +20,6 @@ public class hd extends JFrame {
 	private JComboBox comboBox_1=new JComboBox();
 	private JComboBox<State> comboBox = new JComboBox<State>(State.values());
 	
-	
 
 	/**
 	 * Create the panel.
